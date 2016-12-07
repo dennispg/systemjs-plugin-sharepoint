@@ -6,6 +6,11 @@
   "main": "./sharepoint.js",
   "types": "./sharepoint.d.ts",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennispg/systemjs-plugin-sharepoint.git"
+  },
+  "homepage": "https://github.com/dennispg/systemjs-plugin-sharepoint",
   "dependencies": {
     "@types/sharepoint": "^2013.0.31"
   }
