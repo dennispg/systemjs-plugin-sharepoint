@@ -6,7 +6,7 @@ A SharePoint 'Script-On-Demand' (SOD) loader plugin for SystemJS.
 Installing
 ---
 
-For installing with jspm, run `jspm install plugin-sharepoint`.
+For installing with jspm, run `jspm install sharepoint`.
 
 SP.SOD Concept
 ---
