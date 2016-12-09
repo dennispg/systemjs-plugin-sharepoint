@@ -70,6 +70,12 @@ Example Usage:
 ---
 
 ```javascript
+/* instead of:
+SP.SOD.executeOrDelayUntilScriptLoaded(function() { 
+    ...
+}, 'sp.js');
+LoadSodByKey('sp.js');
+*/
 System.import('sp.js!sharepoint')
 .then(function() {
     var context = new SP.ClientContext();
