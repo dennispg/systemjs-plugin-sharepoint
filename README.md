@@ -70,11 +70,18 @@ Example Usage:
 ---
 
 ```javascript
+/* instead of:
+SP.SOD.executeOrDelayUntilScriptLoaded(function() { 
+    ...
+}, 'sp.js');
+LoadSodByKey('sp.js');
+*/
 System.import('sp.js!sharepoint')
 .then(function() {
     var context = new SP.ClientContext();
     var web = context.get_web();
-    var list = web.get_list();
+    var lists = web.get_lists();
+    var list = lists.getByTitle('list_title');
 
     /* instead of:
     var query = new SP.CamlQuery();
