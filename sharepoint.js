@@ -53,10 +53,26 @@ function addSPJsomExtensions() {
             return collection;
         };
     if (!SP.ClientObjectCollection.prototype['firstOrDefault'])
-        SP.ClientObjectCollection.prototype['firstOrDefault'] = function () {
+        SP.ClientObjectCollection.prototype['firstOrDefault'] = function (iteratee) {
             var enumerator = this.getEnumerator();
-            if (enumerator.moveNext())
-                return enumerator.get_current();
+            if (enumerator.moveNext()) {
+                var current = enumerator.get_current();
+                if(iteratee) {
+                    if(iteratee(current))
+                        return current;
+                }
+                else
+                    return current;
+            }
+            return null;
+        };
+    if(!SP.ClientObjectCollection.prototypes['any'])
+        SP.ClientObjectCollection.prototype['any'] = function(iteratee) {
+            var enumerator = this.getEnumerator();
+            if (enumerator.moveNext()) {
+                if(iteratee(enumerator.get_current()))
+                return 
+            }
             return null;
         };
     if (!SP.List.prototype['get_queryResult'])

@@ -23,8 +23,11 @@ declare interface IEnumerable<T> {
     toArray(): T[];
 
 
-    /** Returns the first element in the collection or null if none */
-    firstOrDefault(): T;
+    /** Returns the first element in the collection or null if none
+     * @param iteratee An optional function to filter by
+     * @return Returns the first item in the collection
+     */
+    firstOrDefault(iteratee?: (item?: T) => T): T;
 }
 
 declare namespace SP {
