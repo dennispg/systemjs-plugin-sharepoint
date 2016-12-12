@@ -66,15 +66,6 @@ function addSPJsomExtensions() {
             }
             return null;
         };
-    if(!SP.ClientObjectCollection.prototypes['any'])
-        SP.ClientObjectCollection.prototype['any'] = function(iteratee) {
-            var enumerator = this.getEnumerator();
-            if (enumerator.moveNext()) {
-                if(iteratee(enumerator.get_current()))
-                return 
-            }
-            return null;
-        };
     if (!SP.List.prototype['get_queryResult'])
         SP.List.prototype['get_queryResult'] = function (queryText) {
             var query = new SP.CamlQuery();
