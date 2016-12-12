@@ -27,7 +27,7 @@ declare interface IEnumerable<T> {
      * @param iteratee An optional function to filter by
      * @return Returns the first item in the collection
      */
-    firstOrDefault(iteratee?: (item?: T) => T): T;
+    firstOrDefault(iteratee?: (item?: T) => boolean): T;
 }
 
 declare namespace SP {
