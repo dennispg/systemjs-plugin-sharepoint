@@ -55,7 +55,7 @@ function addSPJsomExtensions() {
     if (!SP.ClientObjectCollection.prototype['firstOrDefault'])
         SP.ClientObjectCollection.prototype['firstOrDefault'] = function (iteratee) {
             var enumerator = this.getEnumerator();
-            if (enumerator.moveNext()) {
+            while (enumerator.moveNext()) {
                 var current = enumerator.get_current();
                 if(iteratee) {
                     if(iteratee(current))
