@@ -7,11 +7,30 @@ export function locate(load) {
     return null;
 }
 ;
+var sodBaseAddress = null;
+var getSodBaseAddress = function() {
+    if(sodBaseAddress) 
+        return sodBaseAddress;
+
+    if(_v_dictSod['sp.js']) {
+        sodBaseAddress = _v_dictSod['sp.js'].url.replace(/sp\.js$/,'');
+    }
+    else {
+        var scripts = document.getElementsByTagName('script');
+        for(var s=0; s < scripts.length; s++)
+            if(scripts[s].src && scripts[s].src.match(/\/sp\.js$/))
+                sodBaseAddress = scripts[s].src.replace(/sp\.js$/,'');
+    }
+
+    return sodBaseAddress;
+}
+;
 export function fetch(load, fetch) {
     return new Promise((resolve, reject) => {
+        if(load.address) load.address = load.address.toLowerCase();
         if (!_v_dictSod[load.address] && load.address != 'sp.ribbon.js') {
-            // if its not registered, we can only assume it must be registered from the _layouts folder
-            SP.SOD.registerSod(load.address, '/_layouts/15/' + load.address);
+            // if its not registered, we can only assume it needs to be        
+            SP.SOD.registerSod(load.address, getSodBaseAddress() + load.address);
         }
         SP.SOD.executeOrDelayUntilScriptLoaded(() => { resolve(''); }, load.address);
         LoadSodByKey(load.address);
