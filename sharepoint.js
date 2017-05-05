@@ -18,11 +18,25 @@ var getSodBaseAddress = function() {
     else {
         var scripts = document.getElementsByTagName('script');
         for(var s=0; s < scripts.length; s++)
-            if(scripts[s].src && scripts[s].src.match(/\/sp\.js$/))
+            if(scripts[s].src && scripts[s].src.match(/\/sp\.js$/)) {
                 sodBaseAddress = scripts[s].src.replace(/sp\.js$/,'');
+                return sodBaseAddress;
+            }
+        sodBaseAddress = "/_layouts/15/";
     }
 
     return sodBaseAddress;
+}
+;
+var sodDeps = {};
+export function RegisterSodDependency(sod, dep) {
+    if(_v_dictSod[sod]) {
+        RegisterSodDep(load.address, sodDeps[load.address][d]);
+        return;
+    }
+    if(!sodDeps[sod])
+        sodDeps[sod] = [];
+    sodDeps[sod].push(dep);
 }
 ;
 export function fetch(load, fetch) {
@@ -31,9 +45,11 @@ export function fetch(load, fetch) {
         if (!_v_dictSod[load.address] && load.address != 'sp.ribbon.js') {
             // if its not registered, we can only assume it needs to be        
             SP.SOD.registerSod(load.address, getSodBaseAddress() + load.address);
+            for(var d=0;sodDeps[load.address] && d<sodDeps[load.address].length;d++)
+                RegisterSodDep(load.address, sodDeps[load.address][d]);
         }
         SP.SOD.executeOrDelayUntilScriptLoaded(() => { resolve(''); }, load.address);
-        LoadSodByKey(load.address);
+        SP.SOD.executeFunc(load.address, null, null);
     });
 }
 ;

@@ -1,4 +1,7 @@
 /// <reference types="sharepoint" />
+declare module 'systemjs-plugin-sharepoint' {
+    export function RegisterSodDependency(sod: string, dep: string);
+}
 
 declare var _v_dictSod : { [address: string]: string };
 
