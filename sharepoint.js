@@ -31,7 +31,7 @@ var getSodBaseAddress = function() {
 var sodDeps = {};
 export function RegisterSodDependency(sod, dep) {
     if(_v_dictSod[sod]) {
-        RegisterSodDep(load.address, sodDeps[load.address][d]);
+        RegisterSodDep(sod, dep);
         return;
     }
     if(!sodDeps[sod])
