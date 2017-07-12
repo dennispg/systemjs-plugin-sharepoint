@@ -13,13 +13,13 @@ var getSodBaseAddress = function() {
         return sodBaseAddress;
 
     if(_v_dictSod['sp.js']) {
-        sodBaseAddress = _v_dictSod['sp.js'].url.replace(/sp\.js$/,'');
+        sodBaseAddress = _v_dictSod['sp.js'].url.replace(/sp\.js(\?.+)?$/,'');
     }
     else {
         var scripts = document.getElementsByTagName('script');
         for(var s=0; s < scripts.length; s++)
-            if(scripts[s].src && scripts[s].src.match(/\/sp\.js$/)) {
-                sodBaseAddress = scripts[s].src.replace(/sp\.js$/,'');
+            if(scripts[s].src && scripts[s].src.match(/\/sp\.js(\?.+)?$/)) {
+                sodBaseAddress = scripts[s].src.replace(/sp\.js(\?.+)?$/,'');
                 return sodBaseAddress;
             }
         sodBaseAddress = "/_layouts/15/";
