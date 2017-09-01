@@ -3,7 +3,7 @@
   "description": "A SharePoint 'Script-On-Demand' (SOD) loader plugin for SystemJS.",
   "version": "0.0.11",
   "author": "Dennis George",
-  "main": "./sharepoint.js",
+  "main": "dist/amd/systemjs-plugin-sharepoint.js",
   "types": "./sharepoint.d.ts",
   "license": "MIT",
   "repository": {
@@ -14,8 +14,10 @@
   "dependencies": {
     "@types/sharepoint": "^2013.1.9"
   },
+  "devDependencies": {
+    "typescript": "^2.5.2"
+  },
   "jspm": {
-    "dependencies": {
-    }
+    "dependencies": {}
   }
 }
