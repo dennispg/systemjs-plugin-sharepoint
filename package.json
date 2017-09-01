@@ -1,7 +1,7 @@
 {
   "name": "systemjs-plugin-sharepoint",
   "description": "A SharePoint 'Script-On-Demand' (SOD) loader plugin for SystemJS.",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "author": "Dennis George",
   "main": "dist/amd/systemjs-plugin-sharepoint.js",
   "types": "./sharepoint.d.ts",
