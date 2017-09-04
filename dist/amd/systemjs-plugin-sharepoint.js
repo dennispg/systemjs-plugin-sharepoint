@@ -41,7 +41,7 @@ define("sharepoint", ["require", "exports"], function (require, exports) {
     exports.RegisterSodDependency = RegisterSodDependency;
     ;
     function fetch(load, fetch) {
-        return new Promise((resolve, reject) => {
+        return new Promise(function (resolve, reject) {
             if (load.address)
                 load.address = load.address.toLowerCase();
             if (!_v_dictSod[load.address] && load.address != 'sp.ribbon.js') {
@@ -49,7 +49,7 @@ define("sharepoint", ["require", "exports"], function (require, exports) {
                 for (var d = 0; sodDeps[load.address] && d < sodDeps[load.address].length; d++)
                     RegisterSodDep(load.address, sodDeps[load.address][d]);
             }
-            SP.SOD.executeOrDelayUntilScriptLoaded(() => { resolve(''); }, load.address);
+            SP.SOD.executeOrDelayUntilScriptLoaded(function () { resolve(''); }, load.address);
             SP.SOD.executeFunc(load.address, null, null);
         });
     }
@@ -82,7 +82,7 @@ define("sharepoint", ["require", "exports"], function (require, exports) {
         if (!SP.ClientObjectCollection.prototype['toArray'])
             SP.ClientObjectCollection.prototype['toArray'] = function () {
                 var collection = [];
-                this.each((i, item) => {
+                this.each(function (i, item) {
                     collection.push(item);
                 });
                 return collection;
@@ -110,13 +110,13 @@ define("sharepoint", ["require", "exports"], function (require, exports) {
         if (!SP.ClientContext.prototype['executeQuery'])
             SP.ClientContext.prototype['executeQuery'] = function () {
                 var context = this;
-                return new Promise((resolve, reject) => {
-                    context.executeQueryAsync((sender, args) => { resolve(args); }, (sender, args) => { reject(args); });
+                return new Promise(function (resolve, reject) {
+                    context.executeQueryAsync(function (sender, args) { resolve(args); }, function (sender, args) { reject(args); });
                 });
             };
         if (!SP.Guid['generateGuid'])
             SP.Guid['generateGuid'] = function () {
-                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
                     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                     return v.toString(16);
                 });

@@ -2,7 +2,7 @@
     "compileOnSave": false,
     "compilerOptions": {
         "sourceMap": false,
-        "target": "es6",
+        "target": "es5",
         "module": "amd",
         "moduleResolution": "node",
         "declaration": false,
