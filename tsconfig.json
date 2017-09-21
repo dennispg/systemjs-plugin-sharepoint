@@ -16,7 +16,7 @@
     },
     "atom": {
         "rewriteTsconfig": false
-    },    
+    },
     "include": [
         "sharepoint.js"
     ]

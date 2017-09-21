@@ -38,12 +38,12 @@ declare namespace SP {
     }
 
     export interface ClientContext {
-        /** A shorthand for context.executeQueryAsync except wrapped as a JS Promise object */        
+        /** A shorthand for context.executeQueryAsync except wrapped as a JS Promise object */
         executeQuery: () => ExtendedPromise<SP.ClientRequestSucceededEventArgs, SP.ClientRequestFailedEventArgs>;
     }
 
     export interface List {
-        /** A shorthand to list.getItems with just the queryText and doesn't require a SP.CamlQuery to be constructed 
+        /** A shorthand to list.getItems with just the queryText and doesn't require a SP.CamlQuery to be constructed
         @param queryText the queryText to use for the query.set_ViewXml() call */
         get_queryResult: (queryText: string) => SP.ListItemCollection;
     }

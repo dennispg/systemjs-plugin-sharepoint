@@ -9,10 +9,10 @@ export function locate(load) {
 ;
 var sodBaseAddress = null;
 var getSodBaseAddress = function() {
-    if(sodBaseAddress) 
+    if(sodBaseAddress)
         return sodBaseAddress;
 
-    if(_v_dictSod['sp.js']) {
+    if(_v_dictSod['sp.js'] && _v_dictSod['sp.js'].loaded) {
         sodBaseAddress = _v_dictSod['sp.js'].url.replace(/sp\.js(\?.+)?$/,'');
     }
     else {
@@ -43,7 +43,7 @@ export function fetch(load, fetch) {
     return new Promise((resolve, reject) => {
         if(load.address) load.address = load.address.toLowerCase();
         if (!_v_dictSod[load.address] && load.address != 'sp.ribbon.js') {
-            // if its not registered, we can only assume it needs to be        
+            // if its not registered, we can only assume it needs to be
             SP.SOD.registerSod(load.address, getSodBaseAddress() + load.address);
             for(var d=0;sodDeps[load.address] && d<sodDeps[load.address].length;d++)
                 RegisterSodDep(load.address, sodDeps[load.address][d]);

@@ -14,7 +14,7 @@ define("sharepoint", ["require", "exports"], function (require, exports) {
     var getSodBaseAddress = function () {
         if (sodBaseAddress)
             return sodBaseAddress;
-        if (_v_dictSod['sp.js']) {
+        if (_v_dictSod['sp.js'] && _v_dictSod['sp.js'].loaded) {
             sodBaseAddress = _v_dictSod['sp.js'].url.replace(/sp\.js(\?.+)?$/, '');
         }
         else {
