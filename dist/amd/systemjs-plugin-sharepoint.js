@@ -87,6 +87,44 @@ define("sharepoint", ["require", "exports"], function (require, exports) {
                 });
                 return collection;
             };
+        if (!SP.ClientObjectCollection.prototype['every'])
+            SP.ClientObjectCollection.prototype['every'] = function (iteratee) {
+                var _this = this;
+                var val = true;
+                var hasitems = false;
+                this.each(function (i, item) {
+                    hasitems = true;
+                    if (!iteratee(item, i, _this)) {
+                        val = false;
+                        return false;
+                    }
+                });
+                return hasitems && val;
+            };
+        if (!SP.ClientObjectCollection.prototype['some'])
+            SP.ClientObjectCollection.prototype['some'] = function (iteratee) {
+                var _this = this;
+                var val = false;
+                this.each(function (i, item) {
+                    if (iteratee(item, i, _this)) {
+                        val = true;
+                        return false;
+                    }
+                });
+                return val;
+            };
+        if (!SP.ClientObjectCollection.prototype['find'])
+            SP.ClientObjectCollection.prototype['find'] = function (iteratee) {
+                var _this = this;
+                var val = undefined;
+                this.each(function (i, item) {
+                    if (iteratee(item, i, _this)) {
+                        val = item;
+                        return false;
+                    }
+                });
+                return val;
+            };
         if (!SP.ClientObjectCollection.prototype['firstOrDefault'])
             SP.ClientObjectCollection.prototype['firstOrDefault'] = function (iteratee) {
                 var enumerator = this.getEnumerator();

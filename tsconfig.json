@@ -18,6 +18,7 @@
         "rewriteTsconfig": false
     },
     "include": [
-        "sharepoint.js"
+        "sharepoint.js",
+        "*.d.ts"
     ]
 }

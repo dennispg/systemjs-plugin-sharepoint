@@ -87,6 +87,41 @@ function addSPJsomExtensions() {
             });
             return collection;
         };
+    if(!SP.ClientObjectCollection.prototype['every'])
+        SP.ClientObjectCollection.prototype['every'] = function(iteratee) {
+            var val = true;
+            var hasitems = false;
+            this.each((i, item) => {
+                hasitems = true;
+                if(!iteratee(item, i, this)) {
+                    val = false;
+                    return false;
+                }
+            });
+            return hasitems && val;
+        }
+    if(!SP.ClientObjectCollection.prototype['some'])
+        SP.ClientObjectCollection.prototype['some'] = function(iteratee) {
+            var val = false;
+            this.each((i, item) => {
+                if(iteratee(item, i, this)) {
+                    val = true;
+                    return false;
+                }
+            });
+            return val;
+        }
+    if(!SP.ClientObjectCollection.prototype['find'])
+        SP.ClientObjectCollection.prototype['find'] = function(iteratee) {
+            var val = undefined;
+            this.each((i, item) => {
+                if(iteratee(item, i, this)) {
+                    val = item;
+                    return false;
+                }
+            });
+            return val;
+        }
     if (!SP.ClientObjectCollection.prototype['firstOrDefault'])
         SP.ClientObjectCollection.prototype['firstOrDefault'] = function (iteratee) {
             var enumerator = this.getEnumerator();
